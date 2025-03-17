@@ -526,7 +526,7 @@
     <section class="form-section">
         <div class="waitlist-form">
             <h3>Join the Waitlist</h3>
-            <form id="waitlistForm">
+            <form id="waitlistForm" method="post">
                 <div class="form-group">
                     <label for="email">Email Address*</label>
                     <input type="email" id="email" required placeholder="Enter your email">
@@ -601,8 +601,34 @@
             
             
             waitlistForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                twitterModal.style.display = 'flex';
+                e.preventDefault(); // Prevent default form submission
+            
+                // Get input values
+                const email = document.getElementById('email').value;
+                const wallet = document.getElementById('wallet').value;
+            
+                // Create request payload
+                const formData = {
+                    email: email,
+                    wallet: wallet
+                };
+            
+                // Send POST request
+                fetch('https://api-fluidpay.onrender.com/store_wallet/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json()) 
+                .then(data => {
+                    console.log('Success:', data);
+                    twitterModal.style.display = 'flex';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             });
             
            
