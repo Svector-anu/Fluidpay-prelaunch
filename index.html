@@ -533,7 +533,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="wallet">Wallet Address (Optional)</label>
+                    <label for="wallet">Wallet Address </label>
                     <input type="text" id="wallet" placeholder="Enter your Ethereum/Scroll address">
                 </div>
                 
@@ -614,9 +614,23 @@
                 const email = document.getElementById('email').value;
                 const wallet = document.getElementById('wallet').value;
                 
-               
                 console.log('Waitlist submission:', { email, wallet, followedOnTwitter: true });
                 
+                // Integration with the store_wallet endpoint
+                fetch("https://api-fluidpay.onrender.com/store_wallet/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, wallet })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Response from store_wallet endpoint:", data);
+                })
+                .catch(error => {
+                    console.error("Error posting to store_wallet endpoint:", error);
+                });
                 
                 showSuccessMessage();
                 twitterModal.style.display = 'none';
