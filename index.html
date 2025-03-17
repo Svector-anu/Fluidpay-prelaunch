@@ -592,45 +592,44 @@
             const closeModal = document.querySelector('.close-modal');
             const confirmFollow = document.getElementById('confirmFollow');
             
-            // Create background particles
+            
             const particlesContainer = document.getElementById('particles');
             for (let i = 0; i < 25; i++) {
                 createParticle(particlesContainer);
             }
             
-            // Show modal on form submission
+            
             waitlistForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 twitterModal.style.display = 'flex';
             });
             
-            // Close modal
+           
             closeModal.addEventListener('click', function() {
                 twitterModal.style.display = 'none';
             });
             
-            // Handle confirmation
+          
             confirmFollow.addEventListener('click', function() {
                 const email = document.getElementById('email').value;
                 const wallet = document.getElementById('wallet').value;
                 
-                // In a real implementation, i would send this data to your server
+               
                 console.log('Waitlist submission:', { email, wallet, followedOnTwitter: true });
                 
-                // Show success and close modal
+                
                 showSuccessMessage();
                 twitterModal.style.display = 'none';
                 waitlistForm.reset();
             });
             
-            // Close modal when clicking outside
             window.addEventListener('click', function(e) {
                 if (e.target === twitterModal) {
                     twitterModal.style.display = 'none';
                 }
             });
             
-            // Add input animations
+            
             const inputs = document.querySelectorAll('input');
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
@@ -642,26 +641,26 @@
             });
         });
         
-        // Function to create animated particles
+    
         function createParticle(container) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            // Random size between 3 and 15px
+           
             const size = Math.random() * 12 + 3;
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             
-            // Random position
+            
             const posX = Math.random() * 100;
             const posY = Math.random() * 100;
             particle.style.left = `${posX}%`;
             particle.style.top = `${posY}%`;
             
-            // Random opacity
+            
             particle.style.opacity = Math.random() * 0.5 + 0.1;
             
-            // Random animation duration and delay
+            
             const duration = Math.random() * 10 + 10;
             const delay = Math.random() * 10;
             particle.style.animationDuration = `${duration}s`;
@@ -670,7 +669,7 @@
             container.appendChild(particle);
         }
         
-        // Function to show a success message
+        
         function showSuccessMessage() {
             const successMessage = document.createElement('div');
             successMessage.style.position = 'fixed';
